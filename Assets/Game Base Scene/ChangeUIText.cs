@@ -25,11 +25,11 @@ public class ChangeUIText : MonoBehaviour {
     {
         if (baseString == "Food & Water:")
         {
-            thisText.text = baseString + " " + pcAttributes.getCurFood().ToString() + "/" + pcAttributes.getMaxFood().ToString();
+            thisText.text = baseString + " " + pcAttributes.GetActualFood().ToString() + "/" + pcAttributes.GetMaxFood().ToString();
         }
         if (baseString == "Supplies:")
         {
-            thisText.text = baseString + " " + pcAttributes.getCurResources().ToString() + "/" + pcAttributes.getMaxResources().ToString();
+            thisText.text = baseString + " " + pcAttributes.GetActualResources().ToString() + "/" + pcAttributes.GetMaxResources().ToString();
         }
 
     }

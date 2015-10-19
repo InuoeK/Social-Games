@@ -7,7 +7,7 @@ public class SceneController : MonoBehaviour {
 	public GameObject ScavengeMenu;
 	// Use this for initialization
 	void Start () {
-	
+        Screen.orientation = ScreenOrientation.Landscape;
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,7 @@ public class SceneController : MonoBehaviour {
 		Task tempTask = new Task ();
 		tempTask.type = "Scavenge";
 		tempTask.location = a_location;
-		tempTask.timeRequired = 10.0f;
+		tempTask.timeRequired = 2.0f;
 
 		TaskManager.GetComponent<TaskManager> ().AddTask (tempTask);
 	}
