@@ -7,30 +7,43 @@ public struct Task
     public string type;
     public string location;
     public float timeRequired;
+
+    public string rewardType;
+    public float rewardValue;
 }
 
 public class TaskManager : MonoBehaviour {
-    VerticalLayoutGroup vlg;
-	// Use this for initialization
-	void Start () {
 
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void CreateScavengeTask(string a_location)
+    {
+        Task tempTask = new Task();
+        tempTask.type = "Scavenge";
+        tempTask.location = a_location;
+        tempTask.timeRequired = 2.0f; // change this depending on the location
+
+        if (a_location == "Cafeteria")
+        {
+            tempTask.rewardType = "Food";
+            tempTask.rewardValue = 2;
+        }
+        if (a_location == "Janitor's Room")
+        {
+            tempTask.rewardType = "Resources";
+            tempTask.rewardValue = 25;
+        }    
+        AddTask(tempTask);
+    }
+
+    public void CreateBuildTask()
+    {
+        //todo
+    }
 
     public void AddTask(Task a_task)
     {
 		GameObject newTask = Instantiate (Resources.Load ("TaskBox")) as GameObject;
-
-        newTask.transform.parent = GameObject.Find("TaskHolder").transform;
-        newTask.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         newTask.GetComponent<TaskBox>().SetTask(a_task);
 
-        newTask.GetComponent<TaskBox>().InitializeTaskBox();
     }
  
     

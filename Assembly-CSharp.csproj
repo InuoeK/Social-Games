@@ -54,7 +54,6 @@
      <Compile Include="Assets\Game Base Scene\Timer.cs" />
      <Compile Include="Assets\Main Menu Scripts\LoadGame.cs" />
      <Compile Include="Assets\RewardGenerator.cs" />
-     <Compile Include="Assets\Suicide.cs" />
      <Compile Include="Assets\TaskBox.cs" />
      <Compile Include="Assets\TaskManager.cs" />
      <Compile Include="Assets\UpdateTimeLeft.cs" />

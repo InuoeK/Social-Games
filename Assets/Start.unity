@@ -865,7 +865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b6817f8e299c34ab6a3c79c8856da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TaskManager: {fileID: 121313926}
   ScavengeMenu: {fileID: 1451754634}
 --- !u!4 &692650598
 Transform:
@@ -1838,7 +1837,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 692650597}
+      - m_Target: {fileID: 121313927}
         m_MethodName: CreateScavengeTask
         m_Mode: 5
         m_Arguments:
@@ -2242,7 +2241,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 692650597}
+      - m_Target: {fileID: 121313927}
         m_MethodName: CreateScavengeTask
         m_Mode: 5
         m_Arguments:

@@ -3,18 +3,12 @@ using System.Collections;
 
 public class SceneController : MonoBehaviour {
 
-	public GameObject TaskManager;
 	public GameObject ScavengeMenu;
 	// Use this for initialization
 	void Start () {
         Screen.orientation = ScreenOrientation.Landscape;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void ShowScavengeMenu()
 	{
 		ScavengeMenu.SetActive (true);
@@ -25,13 +19,4 @@ public class SceneController : MonoBehaviour {
 		ScavengeMenu.SetActive (false);
 	}
 
-	public void CreateScavengeTask(string a_location)
-	{
-		Task tempTask = new Task ();
-		tempTask.type = "Scavenge";
-		tempTask.location = a_location;
-		tempTask.timeRequired = 2.0f;
-
-		TaskManager.GetComponent<TaskManager> ().AddTask (tempTask);
-	}
 }

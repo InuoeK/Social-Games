@@ -44,8 +44,6 @@ public class Timer : MonoBehaviour
     {
         if (countdownTimer < 0.0f)
         {
-           // this.GetComponentInChildren<Text>().text = "Finished!";
-
             if (rewardGiven == false)
                 GiveReward();
             // Do the rest of the cleanup here
