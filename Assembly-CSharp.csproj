@@ -45,6 +45,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameState.cs" />
+     <Compile Include="Assets\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\GameScene\BulletLife.cs" />
      <Compile Include="Assets\Scripts\GameScene\CombatModule.cs" />
      <Compile Include="Assets\Scripts\GameScene\CombatModuleAttributes.cs" />
@@ -54,6 +56,7 @@
      <Compile Include="Assets\Scripts\GameScene\DeleteOnContact.cs" />
      <Compile Include="Assets\Scripts\GameScene\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\GameScene\JoystickScripts.cs" />
+     <Compile Include="Assets\Scripts\GameScene\MobileOnly.cs" />
      <Compile Include="Assets\Scripts\GameScene\PlayerCombat.cs" />
      <Compile Include="Assets\Scripts\GameScene\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\GameScene\ShootingControl.cs" />
@@ -65,6 +68,8 @@
      <Compile Include="Assets\Scripts\MainMenu\MenuStateModule.cs" />
      <Compile Include="Assets\Scripts\MainMenu\PistolTriggerScript.cs" />
      <Compile Include="Assets\Scripts\MainMenu\SlideControl.cs" />
+     <Compile Include="Assets\ShopUIUpdater.cs" />
+     <Compile Include="Assets\ShowHideMenu.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

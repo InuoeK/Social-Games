@@ -33,11 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-    	if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-			CheckMobileControls ();
+		if (GameObject.Find ("GameController").GetComponent<GameState> ().GetInBattle ()) {
+			if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+				CheckMobileControls ();
 
-		if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-			CheckComputerControls();
+			if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+				CheckComputerControls ();
+		}
     }
 
 	void CheckComputerControls()

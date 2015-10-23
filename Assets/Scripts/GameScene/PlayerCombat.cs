@@ -1,8 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public struct Weapon
+{
+	public string name;
+	public int ammo;
+	public int damage;
+	public float fireSpeed;
+}
+
+
 public class PlayerCombat : MonoBehaviour
 {
+	Weapon curWep;
     public float bulletSpeed;
     private ControlModule cm;
 
@@ -15,11 +25,13 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-			CheckMobileControls ();
+		if (GameObject.Find ("GameController").GetComponent<GameState> ().GetInBattle ()) {
+			if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+				CheckMobileControls ();
 		
-		if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-			CheckComputerControls();
+			if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+				CheckComputerControls ();
+		}
     }
 
     private void CheckMobileControls()

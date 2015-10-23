@@ -6,7 +6,7 @@ public class DamageText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.parent = GameObject.Find("UI_Controls").transform;
+        transform.parent = GameObject.Find("UICanvas").transform;
         GetComponent<Text>().fontSize = 80;
         GetComponent<Rigidbody2D>().velocity = new Vector2(30, 50); 
 	}

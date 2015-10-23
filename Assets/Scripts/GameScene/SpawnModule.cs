@@ -10,6 +10,7 @@ public class SpawnModule : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(this.gameObject.GetComponent<GameState>().GetInBattle())
         SimpleSpawning();
 	
 	}

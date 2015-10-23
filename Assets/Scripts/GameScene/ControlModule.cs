@@ -10,9 +10,16 @@ public class ControlModule : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        mJoy = GameObject.Find("MovementJoy").GetComponent<JoystickScripts>();
-        aJoy = GameObject.Find("AimingJoy").GetComponent<JoystickScripts>();
+		MobileOnly ();
     }
+
+	void MobileOnly()
+	{
+		if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) {
+			mJoy = GameObject.Find("MovementJoy").GetComponent<JoystickScripts>();
+			aJoy = GameObject.Find("AimingJoy").GetComponent<JoystickScripts>();
+		}
+	}
 
     // Update is called once per frame
     void Update()
