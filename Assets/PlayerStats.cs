@@ -32,6 +32,7 @@ public class PlayerStats : MonoBehaviour {
     void Update()
     {
         UpdateSquareBucksUI();
+        UpdateAmmoText();
     }
 
 
@@ -59,6 +60,10 @@ public class PlayerStats : MonoBehaviour {
 		maxAmmo = 10 + ammolevel * 2;
 	}
 
+    void UpdateAmmoText()
+    {
+        GameObject.Find("ammotext").GetComponent<Text>().text = "Ammo: " + currentAmmo + " / " + maxAmmo;
+    }
 	public void ReloadAmmo()
 	{
 		currentAmmo = maxAmmo;
@@ -76,6 +81,13 @@ public class PlayerStats : MonoBehaviour {
 		return currentAmmo;
 	}
 
+    public bool NeedToReload()
+    {
+        if (currentAmmo != maxAmmo)
+            return true;
+        else
+            return false;
+    }
 
     /// <summary>
     /// Get the level of the player's stat 

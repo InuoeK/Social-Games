@@ -10,12 +10,16 @@ public class SpawnModule : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(this.gameObject.GetComponent<GameState>().GetInBattle())
-        SimpleSpawning();
+
 	
 	}
 
-    private void SimpleSpawning()
+    public void SpawnCircleEnemy()
+    {
+        Instantiate(Resources.Load("Enemy"), new Vector3(10, Random.Range(-4, 4)), Quaternion.identity);
+    }
+
+    public void SimpleSpawning()
     {
         if(Random.Range(0, 100) < spawnChance)
             Instantiate(Resources.Load("Enemy"),new Vector3(10, Random.Range(-4,4)), Quaternion.identity);

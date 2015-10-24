@@ -16,6 +16,12 @@ public class ShowHideMenu : MonoBehaviour {
 	
 	}
 
+    /// <summary>
+    /// Valid arguments:
+    /// prep
+    /// shop
+    /// </summary>
+    /// <param name="a_menu"></param>
 	public void ShowMenu(string a_menu)
 	{
 		if (a_menu == "prep")

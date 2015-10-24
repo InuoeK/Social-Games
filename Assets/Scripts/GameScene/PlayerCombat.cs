@@ -1,20 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
-
+using System;
 
 
 public class PlayerCombat : MonoBehaviour
 {
 
     float baseFireCooldown;
+    float reloadTime;
+    float reloadTimer;
     float elapsedTime;
+    bool isReloading;
     public float bulletSpeed;
     private ControlModule cm;
 
+    public GameObject reloadMessage;
+    public GameObject reloadNotification;
 
     // Use this for initialization
     void Start()
     {
+        reloadTime = 1.5f;
+        isReloading = false;
         baseFireCooldown = 1.0f;
         cm = GameObject.Find("GameController").GetComponent<ControlModule>();
     }
@@ -23,7 +31,7 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
 		elapsedTime += Time.deltaTime;
-        if (OkayToShoot())
+        if (OkayToShoot() && !isReloading && this.gameObject.GetComponent<PlayerStats>().GetCurrentAmmo() > 0)
         {
             if (GameObject.Find("GameController").GetComponent<GameState>().GetInBattle())
             {
@@ -35,9 +43,44 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-		if (Input.GetKey ("r"))
-			Reload ();
+        if (this.gameObject.GetComponent<PlayerStats>().GetCurrentAmmo() == 0)
+        {
+            reloadNotification.SetActive(true);
+        }
+        else
+            reloadNotification.SetActive(false);
+
+        if (Input.GetKey("r") && GameObject.Find("Player").GetComponent<PlayerStats>().NeedToReload())
+        {
+            SetIsReloadingTrue();
+        }
+
+        if (isReloading) 
+            CheckReload();
     }
+
+
+    void SetIsReloadingTrue()
+    {
+        isReloading = true;
+        reloadMessage.SetActive(true);
+    }
+
+    void CheckReload()
+    {
+        reloadTimer += Time.deltaTime;
+        reloadMessage.GetComponentInChildren<Text>().text =
+            "Reloading\n" + Math.Round((reloadTimer / reloadTime * 100.0f), 2) + "%";
+        if (reloadTimer >= reloadTime)
+        {
+            Reload();
+            reloadTimer = 0.0f;
+            isReloading = false;
+            reloadMessage.SetActive(false);
+        }
+    }
+
+
 
 	void Reload()
 	{
