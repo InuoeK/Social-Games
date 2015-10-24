@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 
@@ -22,6 +22,7 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		elapsedTime += Time.deltaTime;
         if (OkayToShoot())
         {
             if (GameObject.Find("GameController").GetComponent<GameState>().GetInBattle())
@@ -33,17 +34,25 @@ public class PlayerCombat : MonoBehaviour
                     CheckComputerControls();
             }
         }
+
+		if (Input.GetKey ("r"))
+			Reload ();
     }
+
+	void Reload()
+	{
+		GameObject.Find ("Player").GetComponent<PlayerStats> ().ReloadAmmo ();
+	}
 
     // Checks cool down for shooting
     bool OkayToShoot()
     {
         if (elapsedTime >= baseFireCooldown - (0.02 * this.gameObject.GetComponent<PlayerStats>().GetLevel("attackspeed")))
         {
-            elapsedTime = 0.0f;
+
             return true;
         }
-        elapsedTime += Time.deltaTime;
+
         return false;
     }
 
@@ -52,6 +61,7 @@ public class PlayerCombat : MonoBehaviour
         Vector2 aimJoy = cm.getAimingDirectionVec();
         if (cm.IsAimingJoyActive())
         {
+			elapsedTime = 0.0f;
             GameObject t = Instantiate(Resources.Load("proj"), GameObject.Find("Player").transform.position, Quaternion.identity) as GameObject;
 
             t.GetComponent<Rigidbody2D>().velocity = new Vector2(aimJoy.x * bulletSpeed, aimJoy.y * bulletSpeed);
@@ -62,15 +72,18 @@ public class PlayerCombat : MonoBehaviour
 
 	void CheckComputerControls()
 	{
+		if(GameObject.Find ("Player").GetComponent<PlayerStats>().GetCurrentAmmo()>0)
 		if(Input.GetMouseButton(0))
 		{	
+			elapsedTime = 0.0f;
 			Vector2 normalizedVec = Camera.main.ScreenToWorldPoint(Input.mousePosition) - GameObject.Find ("Player").transform.position;
 			normalizedVec.Normalize();
 			GameObject t = Instantiate (Resources.Load ("proj"), GameObject.Find ("Player").transform.position, Quaternion.identity) as GameObject;
 				
 			t.GetComponent<Rigidbody2D>().velocity = new Vector2 (normalizedVec.x * bulletSpeed, normalizedVec.y * bulletSpeed);
 			Quaternion q = Quaternion.AngleAxis (Mathf.Atan2 (normalizedVec.x, normalizedVec.y) * -180 / Mathf.PI, new Vector3(0,0, 1));
-			t.transform.rotation = q;				
+			t.transform.rotation = q;	
+			GameObject.Find ("Player").GetComponent<PlayerStats>().ChangeCurrentAmmo(-1);
 		}
 	}
 }

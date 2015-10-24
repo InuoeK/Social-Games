@@ -17,10 +17,13 @@ public class PlayerStats : MonoBehaviour {
     float curSquareBucksValue;
     float updateValue;
 
+
+	int maxAmmo;
+	int currentAmmo;
 	// Use this for initialization
 	void Start() {
         movespeedlevel = damagelevel = ammolevel = attackspeedlevel = 1;
-
+		currentAmmo = maxAmmo = 10;
         squareBucks = 10000;
         curSquareBucksValue = 0.0f;
         updateValue = 0.0f;
@@ -40,13 +43,37 @@ public class PlayerStats : MonoBehaviour {
 	public void AddLevel(string a_toadd, int a_levelstoadd)
 	{
 		if (a_toadd == "movespeed")
-			movespeedlevel+=a_levelstoadd;
+			movespeedlevel += a_levelstoadd;
 		else if (a_toadd == "damage")
-			damagelevel+=a_levelstoadd;
-		else if (a_toadd == "ammo")
-			ammolevel+=a_levelstoadd;
+			damagelevel += a_levelstoadd;
+		else if (a_toadd == "ammo") {
+			ammolevel += a_levelstoadd;
+			UpdateMaxAmmo();
+		}
 		else if (a_toadd == "attackspeed")
 			attackspeedlevel+=a_levelstoadd;
+	}
+
+	void UpdateMaxAmmo()
+	{
+		maxAmmo = 10 + ammolevel * 2;
+	}
+
+	public void ReloadAmmo()
+	{
+		currentAmmo = maxAmmo;
+		GameObject.Find ("ammotext").GetComponent<Text> ().text = currentAmmo.ToString ();
+	}
+
+	public void ChangeCurrentAmmo(int a_int)
+	{
+		currentAmmo += a_int;
+		GameObject.Find ("ammotext").GetComponent<Text> ().text = currentAmmo.ToString ();
+	}
+
+	public int GetCurrentAmmo()
+	{
+		return currentAmmo;
 	}
 
 

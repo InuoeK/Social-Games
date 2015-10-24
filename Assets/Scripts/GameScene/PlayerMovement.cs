@@ -57,9 +57,15 @@ public class PlayerMovement : MonoBehaviour
 		if (Input.GetKey ("s"))
             moveVec.y -= moveSpeedMult + (0.2f * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed"));
 
+
+
         if (rb.velocity.magnitude < maxSpeed + (0.2 * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed")))
 			rb.velocity = moveVec;
 	
+	}
+
+	void Reload()
+	{
 	}
 
 	void CheckMobileControls()
