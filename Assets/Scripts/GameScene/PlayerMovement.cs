@@ -46,18 +46,18 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Vector2 moveVec = new Vector2 (0, 0);
 		if (Input.GetKey ("w"))
-			moveVec.y += moveSpeedMult;
+            moveVec.y += moveSpeedMult + (0.2f * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed"));
 
 		if (Input.GetKey ("a"))
-			moveVec.x -= moveSpeedMult;
+            moveVec.x -= moveSpeedMult + (0.2f * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed"));
 
 		if (Input.GetKey ("d"))
-			moveVec.x += moveSpeedMult;
+            moveVec.x += moveSpeedMult + (0.2f * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed"));
 	
 		if (Input.GetKey ("s"))
-			moveVec.y -= moveSpeedMult;
+            moveVec.y -= moveSpeedMult + (0.2f * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed"));
 
-		 if (rb.velocity.magnitude < maxSpeed)
+        if (rb.velocity.magnitude < maxSpeed + (0.2 * this.gameObject.GetComponent<PlayerStats>().GetLevel("movespeed")))
 			rb.velocity = moveVec;
 	
 	}

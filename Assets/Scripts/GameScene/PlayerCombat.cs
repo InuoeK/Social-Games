@@ -1,37 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public struct Weapon
-{
-	public string name;
-	public int ammo;
-	public int damage;
-	public float fireSpeed;
-}
 
 
 public class PlayerCombat : MonoBehaviour
 {
-	Weapon curWep;
+
+    float baseFireCooldown;
+    float elapsedTime;
     public float bulletSpeed;
     private ControlModule cm;
+
 
     // Use this for initialization
     void Start()
     {
+        baseFireCooldown = 1.0f;
         cm = GameObject.Find("GameController").GetComponent<ControlModule>();
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (GameObject.Find ("GameController").GetComponent<GameState> ().GetInBattle ()) {
-			if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-				CheckMobileControls ();
-		
-			if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-				CheckComputerControls ();
-		}
+        if (OkayToShoot())
+        {
+            if (GameObject.Find("GameController").GetComponent<GameState>().GetInBattle())
+            {
+                if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+                    CheckMobileControls();
+
+                if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+                    CheckComputerControls();
+            }
+        }
+    }
+
+    // Checks cool down for shooting
+    bool OkayToShoot()
+    {
+        if (elapsedTime >= baseFireCooldown - (0.02 * this.gameObject.GetComponent<PlayerStats>().GetLevel("attackspeed")))
+        {
+            elapsedTime = 0.0f;
+            return true;
+        }
+        elapsedTime += Time.deltaTime;
+        return false;
     }
 
     private void CheckMobileControls()

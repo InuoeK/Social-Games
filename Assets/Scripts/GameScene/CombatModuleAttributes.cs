@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CombatModuleAttributes : MonoBehaviour {
 
-    public int health;
+    public float health;
 
-    public int damage;
+    public float damage;
 
 
 	// Use this for initialization
@@ -18,7 +18,7 @@ public class CombatModuleAttributes : MonoBehaviour {
 	
 	}
 
-    public void ModifyHealth(int a_modint)
+    public void ModifyHealth(float a_modint)
     {
         health += a_modint;
 

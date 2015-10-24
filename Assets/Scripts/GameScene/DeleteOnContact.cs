@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;   
 
 public class DeleteOnContact : MonoBehaviour
 {
@@ -20,7 +21,16 @@ public class DeleteOnContact : MonoBehaviour
     {
         if (_other.CompareTag("Enemy"))
         {
-            GameObject.Find("GameController").GetComponent<CombatModule>().DealDamage(Random.Range(1,10), _other.gameObject);
+            float damage = 3.0f;
+            damage += GameObject.Find("Player").GetComponent<PlayerStats>().GetLevel("damage") * 0.25f;
+
+            //Add some random factor to the damage
+            float divisor = UnityEngine.Random.Range(60, 100);
+
+            // do between 70-100% of calculated damage
+            damage /= (divisor / 100.0f);
+            damage = (float)Math.Round(damage, 2);
+            GameObject.Find("GameController").GetComponent<CombatModule>().DealDamage(damage, _other.gameObject);
             Destroy(this.gameObject);
         }
     }

@@ -17,7 +17,7 @@ public class CombatModule : MonoBehaviour
 
     }
 
-    public void DealDamage(int a_damage, GameObject a_target)
+    public void DealDamage(float a_damage, GameObject a_target)
     {
         if (a_target.GetComponent<CombatModuleAttributes>())
         {
